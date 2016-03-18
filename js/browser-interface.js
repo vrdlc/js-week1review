@@ -1,31 +1,26 @@
-var apiKey = require('./../.env').apiKey;
+var getGit = require('./../js/api.js');
 
 $(document).ready(function() {
-  $("#gitHubUserName").click(function() {
-    var userName = $("#inputUserName").val();
-    $.get(apiKey + "users/" + userName).then(function(response) {
-      console.log(response);
-      $('#showUserName').text(response.login);
+  $("#gitHubUserName").click(function(event) {
+    event.preventDefault();
 
-
-    }).fail(function(error) {
-      console.log(error.responseJSON.message);
-    });
+    getGit.getUserName();
+    $("#showUserName").text(response.login);
   });
 
 
-  $("#gitHubUserName").click(function() {
-    var userName = $("#inputUserName").val();
-    $.get(apiKey + "users/" + userName + "/repos").then(function(response) {
-      console.log(response);
-       for(var i = 0; i < response.length; i++)
-       $("#showRepos").append("<li>" + response[i].full_name + "</li>");
-
-
-    }).fail(function(error) {
-      console.log(error.responseJSON.message);
-    });
-  });
+  // $("#gitHubUserName").click(function() {
+  //   var userName = $("#inputUserName").val();
+  //   $.get("https://api.github.com/users/" + userName + "?access_token=" + apiKey).then(function(response) {
+  //     console.log(response);
+  //      for(var i = 0; i < response.length; i++)
+  //      $("#showRepos").append("<li>" + response[i].full_name + "</li>");
+  //
+  //
+  //   }).fail(function(error) {
+  //     console.log(error.responseJSON.message);
+  //   });
+  // });
 
 
 
